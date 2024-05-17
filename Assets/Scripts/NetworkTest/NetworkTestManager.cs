@@ -56,14 +56,6 @@ namespace NetworkTest
         }
 
         void Update() {
-            if (NetworkManager.Singleton.IsServer) {
-                Camera.main.transform.position = new Vector3(0, 1.0f, -10.0f);
-            } else {
-                var playerObject = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject();
-                if (playerObject != null) {
-                    Camera.main.transform.position = playerObject.transform.position + new Vector3(0, 0.291f, 0);
-                }
-            }
         }
     }
 }

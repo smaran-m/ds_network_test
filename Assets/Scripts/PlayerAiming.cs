@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerAiming : MonoBehaviour
 {
@@ -61,7 +61,7 @@ public class PlayerAiming : MonoBehaviour
 		cameraEulerPunchApplied.x += punchAngle.x;
 		cameraEulerPunchApplied.y += punchAngle.y;
 
-		Camera.main.transform.eulerAngles = cameraEulerPunchApplied;
+		transform.eulerAngles = cameraEulerPunchApplied;
 	}
 
 	public void ViewPunch(Vector2 punchAmount)

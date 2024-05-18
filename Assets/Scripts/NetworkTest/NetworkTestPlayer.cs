@@ -5,25 +5,23 @@ namespace NetworkTest
 {
     public class NetworkTestPlayer : NetworkBehaviour
     {
-        public NetworkVariable<Vector3> Position = new NetworkVariable<Vector3>();
+        public NetworkVariable<Vector3> NetworkPosition = new NetworkVariable<Vector3>();
 
         public override void OnNetworkSpawn()
         {
             if (IsOwner)
-            {
-                Move();
-            }
+                ForceMove();
         }
 
-        public void Move()
+        public void ForceMove()
         {
-            SubmitPositionRequestServerRpc();
+            SubmitPositionRequestServerRpc(GetRandomPositionOnPlane());
         }
 
         [Rpc(SendTo.Server)]
-        void SubmitPositionRequestServerRpc(RpcParams rpcParams = default)
+        public void SubmitPositionRequestServerRpc(Vector3 position, RpcParams rpcParams = default)
         {
-            transform.position = Position.Value = GetRandomPositionOnPlane();
+            transform.position = NetworkPosition.Value = position;
         }
 
         static Vector3 GetRandomPositionOnPlane()
@@ -33,7 +31,7 @@ namespace NetworkTest
 
         void Update()
         {
-            transform.position = Position.Value;
+            transform.position = NetworkPosition.Value;
         }
     }
 }

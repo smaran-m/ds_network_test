@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
+using Unity.Netcode;
+using NetworkTest;
 
 namespace Fragsurf.Movement {
 
@@ -261,6 +263,8 @@ namespace Fragsurf.Movement {
 
             _colliderObject.transform.rotation = Quaternion.identity;
 
+            var networkPlayer = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject().GetComponent<NetworkTestPlayer>();
+            networkPlayer.SubmitPositionRequestServerRpc(transform.position);
         }
         
         private void UpdateTestBinds () {
